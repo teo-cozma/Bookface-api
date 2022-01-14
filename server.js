@@ -53,7 +53,7 @@ app.use(express.static('public'));
 // app.use('/', require('./src/routes/router'))
 
 // Teo's routes
-// app.use('/the_hall', postRoutes)
+app.use('/posts', postRoutes)
 // app.use('/the_floor', profilRoutes)
 // app.use('/login', loginRoutes)
 // app.use('/register', registerRoutes)
