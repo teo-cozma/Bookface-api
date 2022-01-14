@@ -1,3 +1,16 @@
+// BACKUP FILE - PLEASE USE APP.JS AS ENTRY POINT //
+// BACKUP FILE - PLEASE USE APP.JS AS ENTRY POINT //
+// BACKUP FILE - PLEASE USE APP.JS AS ENTRY POINT //
+// BACKUP FILE - PLEASE USE APP.JS AS ENTRY POINT //
+// BACKUP FILE - PLEASE USE APP.JS AS ENTRY POINT //
+// BACKUP FILE - PLEASE USE APP.JS AS ENTRY POINT //
+// BACKUP FILE - PLEASE USE APP.JS AS ENTRY POINT //
+// BACKUP FILE - PLEASE USE APP.JS AS ENTRY POINT //
+// BACKUP FILE - PLEASE USE APP.JS AS ENTRY POINT //
+// BACKUP FILE - PLEASE USE APP.JS AS ENTRY POINT //
+// BACKUP FILE - PLEASE USE APP.JS AS ENTRY POINT //
+// BACKUP FILE - PLEASE USE APP.JS AS ENTRY POINT //
+
 // Nico's code
 const express = require('express');
 const dotenv = require('dotenv');
@@ -10,11 +23,13 @@ const session = require('express-session')
 const flash = require('connect-flash')
 const passport = require('passport')
 require("./src/config/passport")
+var cors = require('cors')
 
 const connectDB = require('./src/database/connection');
 
 // Teo's code
 const postRoutes = require('./src/routes/postRoutes')
+const indexRoutes = require('./src/routes/indexRoute')
 // const profilRoutes = require('./server/routes/profilRoutes');
 // const loginRoutes = require('./server/routes/loginRoutes');
 // const registerRoutes = require('./server/routes/registerRoutes');
@@ -33,6 +48,9 @@ app.use(morgan('tiny'));
 // mongodb connection
 connectDB();
 
+app.use(cors());
+app.options('*', cors())
+
 // parse request to body-parser
 app.use(bodyparser.urlencoded({ extended : true}))
 app.use(express.urlencoded({ extended: true }));
@@ -42,9 +60,9 @@ app.set("view engine", "ejs")
 //app.set("views", path.resolve(__dirname, "views/ejs"))
 
 // load assets
-app.use('/css', express.static(path.resolve(__dirname, "assets/css")))
-app.use('/img', express.static(path.resolve(__dirname, "assets/img")))
-app.use('/js', express.static(path.resolve(__dirname, "assets/js")))
+// app.use('/css', express.static(path.resolve(__dirname, "assets/css")))
+// app.use('/img', express.static(path.resolve(__dirname, "assets/img")))
+// app.use('/js', express.static(path.resolve(__dirname, "assets/js")))
 
 // render CSS and other static files //
 app.use(express.static('public'));
@@ -54,6 +72,8 @@ app.use(express.static('public'));
 
 // Teo's routes
 app.use('/posts', postRoutes)
+app.use('/', indexRoutes)
+
 // app.use('/the_floor', profilRoutes)
 // app.use('/login', loginRoutes)
 // app.use('/register', registerRoutes)
@@ -63,21 +83,21 @@ app.use('/posts', postRoutes)
 // app.use('/dashboard', dashboardRoutes)
 
 // Brigita's routes
-app.use(session({
-    secret: 'secret',
-    resave: true,
-    saveUninitialized : true
-}))
+// app.use(session({
+//     secret: 'secret',
+//     resave: true,
+//     saveUninitialized : true
+// }))
 
-app.use(passport.initialize())
-app.use(passport.session())
+// app.use(passport.initialize())
+// app.use(passport.session())
 
-app.use(flash())
-app.use((req,res,next)=>{
-    res.locals.success_msg = req.flash('success_msg')
-    res.locals.error_msg= req.flash('error_msg')
-    res.locals.error = req.flash('error')
-    next()
-})
+// app.use(flash())
+// app.use((req,res,next)=>{
+//     res.locals.success_msg = req.flash('success_msg')
+//     res.locals.error_msg= req.flash('error_msg')
+//     res.locals.error = req.flash('error')
+//     next()
+// })
 
 app.listen(PORT, ()=> { console.log(`Server is running on http://localhost:${PORT}`)});
