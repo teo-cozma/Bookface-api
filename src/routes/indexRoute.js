@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     console.log('Inside the route')
-    res.send(200).json({ result: 'ok', data: response})
+    res.status(200).json({ result: 'ok', data: response})
 });
 
 module.exports = router;

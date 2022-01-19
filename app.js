@@ -12,6 +12,7 @@ const connectDB = require('./src/database/connection');
 app.use(express.urlencoded({extended : false}))
 
 const postRoutes = require('./src/routes/postRoutes')
+const profileRoutes = require('./src/routes/profilRoutes')
 const indexRoutes = require('./src/routes/indexRoute')
 
 dotenv.config( { path : 'config.env'} )
@@ -23,6 +24,7 @@ app.use(cors());
 app.options('*', cors())
 
 app.use('/posts', postRoutes)
+app.use('/profiles', profileRoutes)
 app.use('/', indexRoutes)
 
 app.get('/', (req, res) => {
